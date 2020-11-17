@@ -1,0 +1,26 @@
+import React from 'react'
+import Steak from './Steak.jpg'
+import {Card, Button, Row} from 'react-bootstrap'
+
+class DisplayList extends React.Component {
+    render() {
+        return (
+            <Row>
+                {this.props.list.map(item => 
+                    <Card key={item.id} style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={Steak} />
+                        <Card.Body>
+                            <Card.Title>{item.name}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{"$" + item.price}</Card.Subtitle>
+                            <Card.Text> {item.type}</Card.Text>
+                            <Card.Text> {item.size}</Card.Text>
+                            <Button variant="primary" onClick={() => this.props.addItem({item})} >Add to Cart</Button>{' '}
+                        </Card.Body>
+                    </Card>
+                )}
+            </Row>
+        )
+    }
+}
+
+export default DisplayList
