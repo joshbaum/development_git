@@ -8,6 +8,7 @@ class NavFilter extends React.Component {
             <Navbar bg="light" expand="lg">
                 {this.props.title}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                {/* use the eventkeys to pass the right arguments to the onSelect functions  */}
                 <Nav defaultActiveKey="All">
                     <Nav.Item>
                         <Nav.Link eventKey="All" onSelect={this.props.filter}>All</Nav.Link>

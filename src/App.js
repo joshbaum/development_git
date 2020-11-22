@@ -2,6 +2,7 @@ import FilteredList from './FilteredList.js'
 import './App.css'
 
 function App() {
+  // my list of products to display, lives in most senior component
   const productList = [
     { id: 1, name: "Steak", size: "Medium", type: "Meat", price: 14.99},
     { id: 12, name: "Steak", size: "Large", type: "Meat", price: 24.99},
@@ -19,6 +20,7 @@ function App() {
   return (
     <div>
       <h1>CS1300 Food Emporium</h1>
+      {/* main component that holds all logic and state*/}
       <FilteredList list={productList} />
     </div>
     

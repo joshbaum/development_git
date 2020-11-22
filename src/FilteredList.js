@@ -8,12 +8,14 @@ import {Col, Row, Container} from 'react-bootstrap'
 class FilteredList extends React.Component {
     constructor(props) {
         super(props);
+        // by default, show all sizes and types of food, display in order of id, and an empty cart
         this.state = {
             size: "All",
             type: "All",
             order: "id",
             cart: []
         };
+        // each of these methods alters the state of this component and are passed to other components
         this.onSelectFilterSize = this.onSelectFilterSize.bind(this);
         this.onSelectFilterType = this.onSelectFilterType.bind(this);
         this.onSelectSortPrice = this.onSelectSortPrice.bind(this);
@@ -40,9 +42,11 @@ class FilteredList extends React.Component {
         });
     };
     
+    
     onClickAddItem = event => {
         let updatedCart = [...this.state.cart]
         const itemIndex = this.state.cart.findIndex(cartItem => cartItem.product.id === event.item.id)
+        // check to see if this item is already in the cart, if so, update its count
         if (itemIndex === -1) {
             updatedCart.push({product: event.item, quantity: 1})
         } else {
@@ -80,6 +84,10 @@ class FilteredList extends React.Component {
         });
     };
 
+
+    // the "matches" methods help render the page based on its state. these alter the product
+    // catalog to order and display the correct items given the current state. they are called
+    // each time the page re-renders
     matchesFilterSize = item => {
         if (this.state.size === "All") { 
             return true
@@ -121,12 +129,16 @@ class FilteredList extends React.Component {
     }
 
     render() {
+        // update the product list
         const filtered = this.props.list.filter(this.matchesFilterSize).filter(this.matchesFilterType);
         const sorted = filtered.sort(this.matchesSort)
         return (
+            // usee grid layout, show product list and cart side by side
             <Container fluid>
                 <Row>
                     <Col lg={7}>
+                        {/* the top of page should contain the sorting + fitlering options 
+                        here, we pass the methods to alter state to the children components */}
                         <div className="mb-4">
                             <NavFilter filter={this.onSelectFilterSize} title={"Size:"} options={["Medium", "Large"]}/>
                             <NavFilter filter={this.onSelectFilterType} title={"Type:"} options={["Meat", "Veggie"]}/>
@@ -135,6 +147,7 @@ class FilteredList extends React.Component {
                         <DisplayList list={sorted} addItem={this.onClickAddItem}/>
                     </Col>
                     <Col>
+                        {/* pass the methods specific to altering the state of the cart to the cart component */}
                         <Cart cart={this.state.cart} remItem={this.onClickRemoveItem} incItem={this.onClickIncreaseQuantity} decItem={this.onClickDecreaseQuantity}/>
                     </Col>
                 </Row>
