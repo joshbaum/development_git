@@ -8,7 +8,7 @@ class DisplayCart extends React.Component {
                 {/* render each item in the list the same way (using the Card react-bootstrap item), using map */}
                 {this.props.cartItems.map(item => 
                     <Card key={item.product.id} style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="logo.svg" />
+                        <Card.Img variant="top" src={item.product.img} />
                         <Card.Body>
                             <Card.Title>{item.product.name}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">{item.product.price}</Card.Subtitle>

@@ -1,5 +1,4 @@
 import React from 'react'
-import Steak from './Steak.jpg'
 import {Card, Button, Row} from 'react-bootstrap'
 
 class DisplayList extends React.Component {
@@ -9,7 +8,7 @@ class DisplayList extends React.Component {
             <Row>
                 {this.props.list.map(item => 
                     <Card key={item.id} style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={Steak} />
+                        <Card.Img variant="top" src={item.img} />
                         <Card.Body>
                             <Card.Title>{item.name}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">{"$" + item.price}</Card.Subtitle>
